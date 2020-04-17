@@ -1,0 +1,88 @@
+<div fxLayoutGap="30em">
+  <button mat-mini-fab
+          color="primary"
+          class="ml-2"
+          matTooltip="Add Doctor"
+          (click)="openDialog()">
+    <mat-icon>add</mat-icon>
+  </button>
+
+
+  <mat-form-field style="width: 440px">
+    <input matInput type="text" (keyup)="doFilter($event.target.value)" placeholder="Search...">
+  </mat-form-field>
+</div>
+
+<div>
+  <mat-table [dataSource]="dataSource" matSort matSortStart="asc">
+
+    <ng-container matColumnDef="select">
+      <mat-header-cell *matHeaderCellDef>
+        <mat-checkbox (change)="$event ? masterToggle() : null"
+                      [checked]="selection.hasValue() && isAllSelected()"
+                      [indeterminate]="selection.hasValue() && !isAllSelected()"
+                      [aria-label]="checkboxLabel()"
+                      color="primary">
+        </mat-checkbox>
+      </mat-header-cell>
+      <mat-cell *matCellDef="let row">
+        <mat-checkbox (click)="$event.stopPropagation()"
+                      (change)="$event ? selection.toggle(row) : null"
+                      [checked]="selection.isSelected(row)"
+                      [aria-label]="checkboxLabel(row)"
+                      color="primary">
+        </mat-checkbox>
+      </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="doctor_id">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>Doctor ID</mat-header-cell>
+      <mat-cell *matCellDef="let doctors"> {{doctors.doctor_id}} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="first_name">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>First Name</mat-header-cell>
+      <mat-cell *matCellDef="let doctors"> {{doctors.first_name}} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="last_name">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>Last Name</mat-header-cell>
+      <mat-cell *matCellDef="let doctors"> {{doctors.last_name}} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="passport_number">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>Passport Number</mat-header-cell>
+      <mat-cell *matCellDef="let doctors"> {{doctors.passport_number}} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="profession">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>Profession</mat-header-cell>
+      <mat-cell *matCellDef="let doctors"> {{doctors.profession}} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="address">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>Address</mat-header-cell>
+      <mat-cell *matCellDef="let doctors"> {{doctors.address}} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="actions">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>Actions</mat-header-cell>
+      <mat-cell *matCellDef="let doctors">
+        <!--        <button mat-icon-button color="primary" matTooltip="Update Doctor"-->
+        <!--          (click)="openModal(employee.employeeId)">-->
+        <!--          <mat-icon>edit</mat-icon>-->
+        <!--        </button>-->
+        <button mat-icon-button color="warn" matTooltip="Delete Doctor"
+                (click)="deleteDoctor(doctors.doctor_id)">
+          <mat-icon>delete</mat-icon>
+        </button>
+      </mat-cell>
+    </ng-container>
+
+    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: displayedColumns; let i = index"></mat-row>
+  </mat-table>
+  <mat-paginator [pageSize]="10" [pageSizeOptions]="[3, 5, 10, 15]">
+  </mat-paginator>
+
+</div>

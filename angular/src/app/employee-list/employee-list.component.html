@@ -1,0 +1,114 @@
+<!--<div class="container-fluid pt-5">-->
+<!--  <mat-card>-->
+<!--    <button mat-icon-button routerLink="/add" routerLinkActive="active" color="primary">-->
+<!--      <mat-icon>add_box</mat-icon>-->
+<!--    </button>-->
+<!--    <mat-table [dataSource]="dataSource" *ngIf="employees">-->
+<!--      <ng-container matColumnDef="First Name">-->
+<!--        <mat-header-cell *matHeaderCellDef>First Name</mat-header-cell>-->
+<!--        <mat-cell *matCellDef="let employee">{{employee.firstName}} </mat-cell>-->
+<!--      </ng-container>-->
+<!--      <ng-container matColumnDef="Last Name">-->
+<!--        <mat-header-cell *matHeaderCellDef>Last Name</mat-header-cell>-->
+<!--        <mat-cell *matCellDef="let employee">{{employee.lastName}} </mat-cell>-->
+<!--      </ng-container>-->
+<!--      <ng-container matColumnDef="Email">-->
+<!--        <mat-header-cell *matHeaderCellDef>Email</mat-header-cell>-->
+<!--        <mat-cell *matCellDef="let employee">{{employee.emailId}} </mat-cell>-->
+<!--      </ng-container>-->
+<!--      <ng-container matColumnDef="Salary">-->
+<!--        <mat-header-cell *matHeaderCellDef>Salary</mat-header-cell>-->
+<!--        <mat-cell *matCellDef="let employee">{{employee.salary}} </mat-cell>-->
+<!--      </ng-container>-->
+<!--      <ng-container matColumnDef="Actions">-->
+<!--        <mat-header-cell *matHeaderCellDef>Actions</mat-header-cell>-->
+<!--        <mat-cell *matCellDef="let employee">-->
+<!--          <button mat-icon-button color="primary" matTooltip="Update row"-->
+<!--                  (click)="updateEmployee(employee.employeeId)">-->
+<!--            <mat-icon>edit</mat-icon>-->
+<!--          </button>-->
+<!--          <button mat-icon-button color="warn" matTooltip="Archive row"-->
+<!--                  (click)="deleteEmployee(employee.employeeId);-->
+<!--                openSnack('Employee Archived', 'snack-success')">-->
+<!--            <mat-icon>archive</mat-icon>-->
+<!--          </button>-->
+<!--        </mat-cell>-->
+<!--      </ng-container>-->
+<!--      <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>-->
+<!--      <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>-->
+<!--    </mat-table>-->
+<!--  </mat-card>-->
+<!--</div>-->
+
+
+<mat-card class="container mt-3">
+      <button mat-icon-button routerLink="/add" routerLinkActive="active" color="primary">
+        <mat-icon>add_box</mat-icon>
+      </button>
+  <div fxLayout fxLayoutAlign="center center">
+    <mat-form-field fxFlex="40%">
+      <input matInput type="text" (keyup)="doFilter($event.target.value)" placeholder="Search...">
+    </mat-form-field>
+  </div>
+  <table mat-table [dataSource]="dataSource" matSort matSortStart="asc">
+
+    <ng-container matColumnDef="select">
+      <th mat-header-cell *matHeaderCellDef>
+        <mat-checkbox (change)="$event ? masterToggle() : null"
+                      [checked]="selection.hasValue() && isAllSelected()"
+                      [indeterminate]="selection.hasValue() && !isAllSelected()"
+                      [aria-label]="checkboxLabel()"
+                      color="primary">
+        </mat-checkbox>
+      </th>
+      <td mat-cell *matCellDef="let row">
+        <mat-checkbox (click)="$event.stopPropagation()"
+                      (change)="$event ? selection.toggle(row) : null"
+                      [checked]="selection.isSelected(row)"
+                      [aria-label]="checkboxLabel(row)"
+                      color="primary">
+        </mat-checkbox>
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="employeeId">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Employee ID</th>
+      <td mat-cell *matCellDef="let employee"> {{employee.employeeId}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="firstName">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>First Name</th>
+      <td mat-cell *matCellDef="let employee"> {{employee.firstName}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="lastName">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Last Name</th>
+      <td mat-cell *matCellDef="let employee"> {{employee.lastName}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="emailId">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Email</th>
+      <td mat-cell *matCellDef="let employee"> {{employee.emailId}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="salary">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Salary</th>
+      <td mat-cell *matCellDef="let employee"> {{employee.salary}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="actions">
+      <mat-header-cell *matHeaderCellDef>Actions</mat-header-cell>
+      <mat-cell *matCellDef="let employee">
+        <button mat-icon-button color="primary" matTooltip="Update row"
+                (click)="updateEmployee(employee.employeeId)">
+          <mat-icon>edit</mat-icon>
+        </button>
+      </mat-cell>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns; let i = index"></tr>
+  </table>
+  <mat-paginator [pageSize]="2" [pageSizeOptions]="[3, 5, 6, 10, 20]">
+  </mat-paginator>
+</mat-card>

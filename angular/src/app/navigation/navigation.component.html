@@ -1,0 +1,25 @@
+<mat-sidenav-container class="sidenav-container">
+  <mat-sidenav-content>
+    <mat-toolbar color="primary">
+      <span>W E B - M E D</span>
+      <button class="ml-5 m-b" mat-raised-button color="primary" [matMenuTriggerFor]="menu">
+        <span>Menu</span>
+      </button>
+      <mat-menu #menu="matMenu">
+        <button mat-menu-item routerLink="admin">
+          <span>Admin</span>
+        </button>
+        <button mat-menu-item routerLink="doctor">
+          <span>Doctor</span>
+        </button>
+        <button mat-menu-item routerLink="patient">
+          <span>Patient</span>
+        </button>
+        <button mat-menu-item routerLink="employees">
+          <span>Employee</span>
+        </button>
+      </mat-menu>
+    </mat-toolbar>
+    <router-outlet></router-outlet>
+  </mat-sidenav-content>
+</mat-sidenav-container>

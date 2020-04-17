@@ -1,0 +1,15 @@
+p {
+  font-weight: bold;
+}
+
+button {
+  outline: none;
+}
+
+table {
+  width: 100%;
+  overflow-x: auto;
+  overflow-y: hidden;
+  min-width: 500px;
+  outline: none;
+}

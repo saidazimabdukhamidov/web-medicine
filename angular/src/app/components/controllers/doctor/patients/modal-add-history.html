@@ -1,0 +1,31 @@
+<div [hidden]="submitted">
+  <form #postForm="ngForm" (ngSubmit)="create(postForm.value)">
+    <div class="container row-cols-3">
+      <h2 class="ml-3">Add Medical History</h2>
+      <mat-form-field appearance="outline" class="col-sm-6">
+        <mat-label>Patient ID</mat-label>
+        <input matInput type="text" required ngModel [(ngModel)]="history.patient_id" name="patientId">
+      </mat-form-field>
+      <mat-form-field appearance="outline" class="col-sm-6">
+        <mat-label>Created Time</mat-label>
+        <input matInput type="text" required ngModel [(ngModel)]="history.created_time" name="createdTime">
+      </mat-form-field>
+      <mat-form-field appearance="outline" class="col-sm-6">
+        <mat-label>Doctor Name</mat-label>
+        <input matInput type="text" required ngModel [(ngModel)]="history.created_by" name="createdBy">
+      </mat-form-field>
+      <mat-form-field appearance="outline" class="col-sm-6">
+        <mat-label>Medical History</mat-label>
+        <input matInput type="text" required ngModel [(ngModel)]="history.history" name="history">
+      </mat-form-field>
+      <button
+        (click)="onNoClick()"
+        [disabled]="!postForm.valid"
+        mat-raised-button
+        color="primary"
+        type="submit"
+        class="float-right mr-3">Add
+      </button>
+    </div>
+  </form>
+</div>

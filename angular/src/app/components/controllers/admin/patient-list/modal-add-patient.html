@@ -1,0 +1,42 @@
+<div [hidden]="submitted">
+  <form #postForm="ngForm" (ngSubmit)="create(postForm.value)">
+    <div class="container row-cols-3">
+      <mat-form-field hidden appearance="outline" class="col-md-6">
+        <mat-label>Patient ID</mat-label>
+        <input matInput type="number" [(ngModel)]="patients.patient_id" name="doctorId">
+      </mat-form-field>
+      <mat-form-field appearance="outline" class="col-md-6">
+        <mat-label>First Name</mat-label>
+        <input matInput type="text" required ngModel [(ngModel)]="patients.first_name" name="firstName">
+      </mat-form-field>
+      <mat-form-field appearance="outline" class="col-md-6">
+        <mat-label>Last Name</mat-label>
+        <input matInput type="text" required ngModel [(ngModel)]="patients.last_name" name="lastName">
+      </mat-form-field>
+      <mat-form-field appearance="outline" class="col-md-6">
+        <mat-label>Father Name</mat-label>
+        <input matInput type="text" required ngModel [(ngModel)]="patients.father_name" name="fatherName">
+      </mat-form-field>
+      <mat-form-field appearance="outline" class="col-md-6">
+        <mat-label>Address</mat-label>
+        <input matInput type="text" required ngModel [(ngModel)]="patients.address" name="address">
+      </mat-form-field>
+      <mat-form-field appearance="outline" class="col-md-6">
+        <mat-label>Birth Date</mat-label>
+        <input matInput type="text" required ngModel [(ngModel)]="patients.birth_date" name="birthDate">
+      </mat-form-field>
+      <mat-form-field appearance="outline" class="col-md-6">
+        <mat-label>Phone Number</mat-label>
+        <input matInput type="text" required ngModel [(ngModel)]="patients.phone_number" name="phoneNumber">
+      </mat-form-field>
+      <button
+        (click)="onNoClick()"
+        [disabled]="!postForm.valid"
+        mat-raised-button
+        color="primary"
+        type="submit"
+        class="float-right mr-3">Save
+      </button>
+    </div>
+  </form>
+</div>

@@ -1,0 +1,30 @@
+import {NgModule} from '@angular/core';
+import {Routes, RouterModule} from '@angular/router';
+import {EmployeeListComponent} from './employee-list/employee-list.component';
+import {EmployeeCreateComponent} from './employee-create/employee-create.component';
+import {EmployeeUpdateComponent} from './employee-update/employee-update.component';
+import {ArchiveListComponent} from './archive-list/archive-list.component';
+import {DashboardComponent} from './dashboard/dashboard.component';
+import {PatientsComponent} from './components/controllers/doctor/patients/patients.component';
+import {HistoryListComponent} from './components/controllers/doctor/history/history-list/history-list.component';
+import {AddHistoryComponent} from './components/controllers/doctor/history/add-history/add-history.component';
+import {MedHistoryListComponent} from './components/controllers/patient/med-history-list/med-history-list.component';
+
+const routes: Routes = [
+  {path: 'employees', component: EmployeeListComponent},
+  {path: 'add', component: EmployeeCreateComponent},
+  {path: 'update/:id', component: EmployeeUpdateComponent},
+  {path: 'archives', component: ArchiveListComponent},
+  {path: 'admin', component: DashboardComponent},
+  {path: 'doctor', component: PatientsComponent},
+  {path: 'history/:id', component: HistoryListComponent},
+  {path: 'add-history', component: AddHistoryComponent},
+  {path: 'patient', component: MedHistoryListComponent}
+];
+
+@NgModule({
+  imports: [RouterModule.forRoot(routes)],
+  exports: [RouterModule]
+})
+export class AppRoutingModule {
+}

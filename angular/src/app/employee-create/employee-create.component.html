@@ -1,0 +1,35 @@
+<div [hidden]="submitted" class="container">
+  <form #postForm="ngForm" (ngSubmit)="create(postForm.value)">
+    <div fxLayout="column" fxLayoutAlign="start center" fxLayoutGap="10px">
+      <mat-form-field hidden appearance="fill">
+        <mat-label>Employee Id</mat-label>
+        <input matInput type="number" [(ngModel)]="employee.employeeId" name="employeeId">
+      </mat-form-field>
+      <mat-form-field appearance="fill">
+        <mat-label>First Name</mat-label>
+        <input matInput type="text" required ngModel [(ngModel)]="employee.firstName" name="firstName">
+      </mat-form-field>
+      <mat-form-field appearance="fill">
+        <mat-label>Last Name</mat-label>
+        <input matInput type="text" required ngModel [(ngModel)]="employee.lastName" name="lastName">
+      </mat-form-field>
+      <mat-form-field appearance="fill">
+        <mat-label>Email Name</mat-label>
+        <input matInput type="text" required ngModel [(ngModel)]="employee.emailId" name="emailId">
+      </mat-form-field>
+      <mat-form-field appearance="fill">
+        <mat-label>Salary</mat-label>
+        <input matInput type="number" required ngModel [(ngModel)]="employee.salary" name="salary">
+      </mat-form-field>
+      <button
+        (click)="openSnack('Employee Created', 'snack-success')"
+        [disabled]="!postForm.valid"
+        mat-raised-button
+        color="primary"
+        type="submit"
+      >Submit
+       <!--         class="float-right mr-3"-->
+      </button>
+    </div>
+  </form>
+</div>

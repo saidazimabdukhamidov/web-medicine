@@ -1,0 +1,34 @@
+button {
+  outline: none;
+}
+
+table {
+  width: 100%;
+  overflow-x: auto;
+  overflow-y: hidden;
+  min-width: 500px;
+  outline: none;
+}
+
+/*.div-card-header {*/
+/*  display: flex;*/
+/*  align-items: center;*/
+/*  justify-content: center;*/
+/*}*/
+
+th {
+  outline: none;
+}
+
+th.mat-header-cell {
+  text-align: left;
+  max-width: 300px;
+}
+
+mat-paginator {
+  outline: none;
+}
+
+.mat-column-select {
+  overflow: initial;
+}

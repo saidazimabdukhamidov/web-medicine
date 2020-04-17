@@ -1,0 +1,89 @@
+<mat-card class="container-fluid mt-3">
+
+  <div fxLayoutGap="30em">
+    <button mat-mini-fab
+            class="ml-2"
+            color="primary"
+            matTooltip="Add Medical History"
+            (click)="openDialog()">
+      <mat-icon>add</mat-icon>
+    </button>
+
+    <mat-form-field style="width: 440px">
+      <input matInput type="text" (keyup)="doFilter($event.target.value)" placeholder="Search...">
+    </mat-form-field>
+  </div>
+
+  <mat-table [dataSource]="dataSource" matSort matSortStart="asc">
+
+    <ng-container matColumnDef="select">
+      <mat-header-cell *matHeaderCellDef>
+        <mat-checkbox (change)="$event ? masterToggle() : null"
+                      [checked]="selection.hasValue() && isAllSelected()"
+                      [indeterminate]="selection.hasValue() && !isAllSelected()"
+                      [aria-label]="checkboxLabel()"
+                      color="primary">
+        </mat-checkbox>
+      </mat-header-cell>
+      <mat-cell *matCellDef="let row">
+        <mat-checkbox (click)="$event.stopPropagation()"
+                      (change)="$event ? selection.toggle(row) : null"
+                      [checked]="selection.isSelected(row)"
+                      [aria-label]="checkboxLabel(row)"
+                      color="primary">
+        </mat-checkbox>
+      </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="patient_id">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>Patient ID</mat-header-cell>
+      <mat-cell *matCellDef="let patients"> {{patients.patient_id}} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="first_name">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>First Name</mat-header-cell>
+      <mat-cell *matCellDef="let patients"> {{patients.first_name}} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="last_name">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>Last Name</mat-header-cell>
+      <mat-cell *matCellDef="let patients"> {{patients.last_name}} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="father_name">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>Father Name</mat-header-cell>
+      <mat-cell *matCellDef="let patients"> {{patients.father_name}} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="address">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>Address</mat-header-cell>
+      <mat-cell *matCellDef="let patients"> {{patients.address}} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="birth_date">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>Salary</mat-header-cell>
+      <mat-cell *matCellDef="let patients"> {{patients.birth_date}} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="phone_number">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>Phone Number</mat-header-cell>
+      <mat-cell *matCellDef="let patients"> {{patients.phone_number}} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="actions">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>Actions</mat-header-cell>
+      <mat-cell *matCellDef="let patients">
+        <button mat-icon-button color="primary" matTooltip="Open Medical History"
+                (click)="medHistory(patients.patient_id)">
+          <mat-icon>remove_red_eye</mat-icon>
+        </button>
+      </mat-cell>
+    </ng-container>
+
+    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: displayedColumns;" (click)="selection.toggle(row)"></mat-row>
+  </mat-table>
+  <mat-paginator [pageSize]="5" [pageSizeOptions]="[3, 5, 6, 10, 20]">
+  </mat-paginator>
+
+</mat-card>
