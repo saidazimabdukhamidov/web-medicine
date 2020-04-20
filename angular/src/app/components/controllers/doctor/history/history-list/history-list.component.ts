@@ -41,11 +41,6 @@ export class HistoryListComponent implements OnInit, AfterViewInit {
       .subscribe(data => {
         this.dataSource.data = data as MedHistory[];
       });
-    // this.doctorService.getPatient(this.id)
-    //   .subscribe(data => {
-    //     console.log(data);
-    //     this.history = data;
-    //   }, error => console.log(error));
   }
 
   doFilter(value: string) {

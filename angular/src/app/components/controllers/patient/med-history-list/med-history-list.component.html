@@ -1,1 +1,18 @@
-<p>med-history-list works!</p>
+<div class="container">
+  <mat-form-field appearance="legacy" class="col-md-4 mt-4">
+    <mat-label>Write your ID:</mat-label>
+    <input matInput type="text"
+           required
+           ngModel
+           [(ngModel)]="history.patient_id">
+  </mat-form-field>
+
+  <button (click)="find(history.patient_id)"
+          mat-icon-button
+          color="primary">
+    <mat-icon>remove_red_eye</mat-icon>
+  </button>
+
+  <router-outlet></router-outlet>
+
+</div>

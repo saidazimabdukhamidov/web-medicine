@@ -1,6 +1,7 @@
 package com.example.demo.controllers;
 
 import com.example.demo.models.Doctor;
+import com.example.demo.models.Employee;
 import com.example.demo.models.Patient;
 import com.example.demo.utils.DataBase;
 import com.google.gson.JsonObject;
@@ -49,19 +50,6 @@ public class AdminController {
       DataBase.close(conn);
     }
     return json.toString();
-  }
-
-  public static void bubbleSort(int[] arr) {
-    int len = arr.length;
-    for (int i = 0; i < len; i++) {
-      for (int j = 1; j < len - i; j++) {
-        if (arr[j - 1] > arr[j]) {
-          int tmp = arr[j - 1];
-          arr[j - 1] = arr[j];
-          arr[j] = tmp;
-        }
-      }
-    }
   }
 
   @PostMapping("/patients")
@@ -188,6 +176,36 @@ public class AdminController {
       DataBase.close(conn);
     }
     return doctors;
+  }
+
+  @PutMapping("/doctors/{doctor_id}")
+  @ResponseBody
+  public String updateDoctor(@RequestBody Doctor doctor, @PathVariable int doctor_id) {
+    JsonObject json = new JsonObject();
+    Connection conn = null;
+    CallableStatement cs = null;
+    try {
+      String first_name = doctor.getFirst_name();
+      String last_name = doctor.getLast_name();
+      String passport_number = doctor.getPassport_number();
+      String profession = doctor.getProfession();
+      String address = doctor.getAddress();
+      conn = hds.getConnection();
+      cs = conn.prepareCall("{CALL SPRING.DOCTOR_UPDATE_P(?, ?, ?, ?, ?, ?)}");
+      cs.setInt(1, doctor_id);
+      cs.setString(2, first_name);
+      cs.setString(3, last_name);
+      cs.setString(4, passport_number);
+      cs.setString(5, profession);
+      cs.setString(6, address);
+      cs.executeUpdate();
+    } catch (Exception e) {
+      e.printStackTrace();
+    } finally {
+      DataBase.close(cs);
+      DataBase.close(conn);
+    }
+    return json.toString();
   }
 
   @DeleteMapping("/doctors/{doctor_id}")

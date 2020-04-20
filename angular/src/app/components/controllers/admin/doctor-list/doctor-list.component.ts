@@ -4,7 +4,7 @@ import {Doctor} from '../../../models/doctor';
 import {SelectionModel} from '@angular/cdk/collections';
 import {MatTableDataSource} from '@angular/material/table';
 import {MatDialog, MatDialogRef} from '@angular/material/dialog';
-import {Router} from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 import {MatPaginator} from '@angular/material/paginator';
 import {MatSort} from '@angular/material/sort';
 
@@ -86,6 +86,10 @@ export class DoctorListComponent implements OnInit, AfterViewInit {
       this.getDoctors();
     })
   }
+
+  updateDoctor(id: number) {
+    this.router.navigate(['doctor-update', id]);
+  }
 }
 
 @Component({
@@ -98,23 +102,62 @@ export class ModalDoctor {
   submitted = false;
 
   constructor(private adminService: AdminService,
-              private router: Router,
               private modal: MatDialogRef<ModalDoctor>) {
   }
 
-  save() {
+  create(value: any) {
+    this.submitted = true;
+
     this.adminService.addDoctor(this.doctors)
       .subscribe(data => console.log(data),
         error => console.log(error));
     this.doctors = new Doctor();
   }
 
-  create(value: any) {
-    this.submitted = true;
-    this.save();
-  }
-
   onNoClick() {
     this.modal.close();
   }
 }
+
+// @Component({
+//   selector: 'app-modal-update-doctor',
+//   templateUrl: 'modal-update-doctor.html',
+//   styleUrls: ['./doctor-list.component.css']
+// })
+// export class ModalUpdateDoctor implements OnInit {
+//   id: number;
+//   doctor: Doctor;
+//   submitted = false;
+//
+//   constructor(private adminService: AdminService,
+//               private route: ActivatedRoute,
+//               private modal: MatDialogRef<ModalUpdateDoctor>) {
+//   }
+//
+//   ngOnInit() {
+//     this.doctor = new Doctor();
+//     this.id = this.route.snapshot.params['id'];
+//     this.adminService.getDoctor(this.id)
+//       .subscribe(data => {
+//         console.log(data);
+//         this.doctor = data;
+//       }, error => console.log(error));
+//   }
+//
+//   updateEmployee(value: any) {
+//     this.submitted = true;
+//     this.adminService.updateDoctor(this.id, this.doctor)
+//       .subscribe(data => console.log(data), error => console.log(error));
+//     this.doctor = new Doctor();
+//   }
+//
+//   getDoctor(id: number) {
+//     this.adminService.getDoctor(id).subscribe(data => {
+//       console.log(data)
+//     })
+//   }
+//
+//   onNoClick() {
+//     this.modal.close();
+//   }
+// }

@@ -10,14 +10,14 @@ import {Observable} from 'rxjs';
   styleUrls: ['./employee-update.component.css']
 })
 export class EmployeeUpdateComponent implements OnInit {
-  employees: Observable<Employee[]>;
   id: number;
   employee: Employee;
   submitted = false;
 
   @Input() e: Employee;
 
-  constructor(private route: ActivatedRoute, private router: Router,
+  constructor(private route: ActivatedRoute,
+              private router: Router,
               private employeeService: EmployeeService) {
   }
 

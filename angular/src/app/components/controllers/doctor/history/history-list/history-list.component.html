@@ -1,9 +1,9 @@
 <mat-card class="container mt-3">
-  <div fxLayoutGap="25em">
-    <button mat-icon-button (click)="back()" class="ml-2">
-      <mat-icon>arrow_back</mat-icon>
-    </button>
-    <mat-form-field>
+  <div>
+<!--    <button mat-icon-button (click)="back()" class="ml-2">-->
+<!--      <mat-icon>arrow_back</mat-icon>-->
+<!--    </button>-->
+    <mat-form-field style="margin-left: 30em">
       <input matInput type="text" (keyup)="doFilter($event.target.value)" placeholder="Search...">
     </mat-form-field>
   </div>

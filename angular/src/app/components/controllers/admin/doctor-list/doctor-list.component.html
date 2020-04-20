@@ -1,4 +1,5 @@
 <div fxLayoutGap="30em">
+
   <button mat-mini-fab
           color="primary"
           class="ml-2"
@@ -6,7 +7,6 @@
           (click)="openDialog()">
     <mat-icon>add</mat-icon>
   </button>
-
 
   <mat-form-field style="width: 440px">
     <input matInput type="text" (keyup)="doFilter($event.target.value)" placeholder="Search...">
@@ -68,10 +68,11 @@
     <ng-container matColumnDef="actions">
       <mat-header-cell *matHeaderCellDef mat-sort-header>Actions</mat-header-cell>
       <mat-cell *matCellDef="let doctors">
-        <!--        <button mat-icon-button color="primary" matTooltip="Update Doctor"-->
-        <!--          (click)="openModal(employee.employeeId)">-->
-        <!--          <mat-icon>edit</mat-icon>-->
-        <!--        </button>-->
+        <button mat-icon-button color="primary" matTooltip="Update Doctor"
+                (click)="updateDoctor(doctors.doctor_id)">
+          <mat-icon>edit</mat-icon>
+        </button>
+
         <button mat-icon-button color="warn" matTooltip="Delete Doctor"
                 (click)="deleteDoctor(doctors.doctor_id)">
           <mat-icon>delete</mat-icon>
