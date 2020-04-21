@@ -1,7 +1,6 @@
 package com.example.demo.controllers;
 
 import com.example.demo.models.Doctor;
-import com.example.demo.models.Employee;
 import com.example.demo.models.Patient;
 import com.example.demo.utils.DataBase;
 import com.google.gson.JsonObject;
@@ -15,9 +14,9 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 
-@RestController
 @CrossOrigin(origins = "http://localhost:4200")
 
+@RestController
 @RequestMapping("/api/v1")
 public class AdminController {
   @Autowired
@@ -36,7 +35,7 @@ public class AdminController {
       String profession = doctor.getProfession();
       String address = doctor.getAddress();
       conn = hds.getConnection();
-      cs = conn.prepareCall("{CALL SPRING.DOCTOR_INSERT_P(?, ?, ?, ?, ?)}");
+      cs = conn.prepareCall("{CALL SPRING.DOCTOR_ADD_P(?, ?, ?, ?, ?)}");
       cs.setString(1, firstName);
       cs.setString(2, lastName);
       cs.setString(3, passportNumber);
@@ -274,3 +273,4 @@ public class AdminController {
     }
   }
 }
+

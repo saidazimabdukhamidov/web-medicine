@@ -3,9 +3,7 @@ import {NgModule} from '@angular/core';
 
 import {AppRoutingModule} from './app-routing.module';
 import {AppComponent} from './app.component';
-import {EmployeeListComponent} from './employee-list/employee-list.component';
 import {HttpClientModule} from '@angular/common/http';
-import {EmployeeCreateComponent} from './employee-create/employee-create.component';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {MatButtonModule} from '@angular/material/button';
 import {MatFormFieldModule} from '@angular/material/form-field';
@@ -13,7 +11,6 @@ import {MatInputModule} from '@angular/material/input';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {MatToolbarModule} from '@angular/material/toolbar';
 import {MatCardModule} from '@angular/material/card';
-import {EmployeeUpdateComponent} from './employee-update/employee-update.component';
 import {MatListModule} from '@angular/material/list';
 import {MatRippleModule} from '@angular/material/core';
 import {MatTableModule} from '@angular/material/table';
@@ -27,9 +24,8 @@ import {MatTooltipModule} from '@angular/material/tooltip';
 import {MatSnackBarModule} from '@angular/material/snack-bar';
 import {FlexLayoutModule} from '@angular/flex-layout';
 import {MatSidenavModule} from '@angular/material/sidenav';
-import {ArchiveListComponent} from './archive-list/archive-list.component';
-import {NavigationComponent} from './navigation/navigation.component';
-import {DashboardComponent} from './dashboard/dashboard.component';
+import {NavigationComponent} from './components/controllers/navigation/navigation.component';
+import {DashboardComponent} from './components/controllers/admin-dashboard/dashboard.component';
 import {DoctorListComponent, ModalDoctor,} from './components/controllers/admin/doctor-list/doctor-list.component';
 import {PatientListComponent, ModalPatient} from './components/controllers/admin/patient-list/patient-list.component';
 import {ModalHistory, PatientsComponent} from './components/controllers/doctor/patients/patients.component';
@@ -40,19 +36,12 @@ import {MatTabsModule} from '@angular/material/tabs';
 import {MatDialogModule} from '@angular/material/dialog';
 import {MatCheckboxModule} from '@angular/material/checkbox';
 import {MedHistoryListComponent} from './components/controllers/patient/med-history-list/med-history-list.component';
-import {AuthComponent} from './components/controllers/auth/auth.component';
 import {DoctorUpdateComponent} from './components/controllers/admin/doctor-list/doctor-update/doctor-update.component';
-import { PatientUpdateComponent } from './components/controllers/admin/patient-list/patient-update/patient-update.component';
-// import {JwtInterceptor} from './components/guards/jwt.interceptor';
-// import {ErrorInterceptor} from './components/guards/error.interceptor';
+import {PatientUpdateComponent} from './components/controllers/admin/patient-list/patient-update/patient-update.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    EmployeeListComponent,
-    EmployeeCreateComponent,
-    EmployeeUpdateComponent,
-    ArchiveListComponent,
     NavigationComponent,
     DashboardComponent,
     PatientListComponent,
@@ -64,7 +53,6 @@ import { PatientUpdateComponent } from './components/controllers/admin/patient-l
     ModalPatient,
     ModalHistory,
     MedHistoryListComponent,
-    AuthComponent,
     DoctorUpdateComponent,
     PatientUpdateComponent,
   ],
@@ -101,12 +89,9 @@ import { PatientUpdateComponent } from './components/controllers/admin/patient-l
   exports: [
     MatSortModule,
   ],
-  providers: [
-    // provide: HTTP_INTERCEPTORS,
-    // useClass: ErrorInterceptor,
-    // multi: true
-  ],
+  providers: [],
   bootstrap: [AppComponent]
 })
+
 export class AppModule {
 }

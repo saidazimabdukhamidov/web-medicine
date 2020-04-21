@@ -1,8 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {Doctor} from '../../../../models/doctor';
 import {AdminService} from '../../../../services/admin.service';
-import {Observable} from 'rxjs';
-import {Employee} from '../../../../../employee';
 import {ActivatedRoute, Router} from '@angular/router';
 
 @Component({

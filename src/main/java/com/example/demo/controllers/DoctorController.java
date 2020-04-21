@@ -13,9 +13,9 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 
-@RestController
 @CrossOrigin(origins = "http://localhost:4200")
 
+@RestController
 @RequestMapping("/api/v1")
 public class DoctorController {
   @Autowired
@@ -29,12 +29,11 @@ public class DoctorController {
     CallableStatement cs = null;
     try {
       int patientId = history.getPatient_id();
-      String fullName = history.getFull_name();
       String medHistory = history.getHistory();
       String createdTime = history.getCreated_time();
       String createdBy = history.getCreated_by();
       conn = hds.getConnection();
-      cs = conn.prepareCall("{CALL SPRING.TESTS(?, ?, ?, ?)}");
+      cs = conn.prepareCall("{CALL SPRING.ADD_MEDICAL_HISTORY_P(?, ?, ?, ?)}");
       cs.setInt(1, patientId);
       cs.setString(2, medHistory);
       cs.setString(3, createdBy);
