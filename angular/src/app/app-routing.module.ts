@@ -13,6 +13,7 @@ import {AuthComponent} from './components/controllers/auth/auth.component';
 import {DoctorUpdateComponent} from './components/controllers/admin/doctor-list/doctor-update/doctor-update.component';
 // import {AuthGuard} from './components/guards/auth.guard';
 import {Role} from './components/models/role';
+import {PatientUpdateComponent} from './components/controllers/admin/patient-list/patient-update/patient-update.component';
 
 const routes: Routes = [
   {
@@ -34,6 +35,16 @@ const routes: Routes = [
   {
     path: 'admin',
     component: DashboardComponent,
+    children: [
+      {
+        path: 'doctor-update/:id',
+        component: DoctorUpdateComponent
+      },
+      {
+        path: 'patient-update/:id',
+        component: PatientUpdateComponent
+      }
+    ]
     // canActivate: [AuthGuard],
     // data: {roles: [Role.Admin]},
   },
@@ -43,10 +54,10 @@ const routes: Routes = [
     // canActivate: [AuthGuard],
     // data: {roles: [Role.Doctor]},
   },
-  {
-    path: 'doctor-update/:id',
-    component: DoctorUpdateComponent
-  },
+  // {
+  //   path: 'doctor-update/:id',
+  //   component: DoctorUpdateComponent
+  // },
   {
     path: 'history/:id',
     component: HistoryListComponent
@@ -71,10 +82,10 @@ const routes: Routes = [
     path: 'auth',
     component: AuthComponent
   },
-  {
-    path: '',
-    component: DashboardComponent
-  },
+  // {
+  //   path: '',
+  //   component: DashboardComponent
+  // },
   {
     path: 'logout',
     component: AuthComponent

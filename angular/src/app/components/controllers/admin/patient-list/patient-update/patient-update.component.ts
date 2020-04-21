@@ -1,18 +1,16 @@
 import {Component, OnInit} from '@angular/core';
-import {Doctor} from '../../../../models/doctor';
+import {Patient} from '../../../../models/patient';
 import {AdminService} from '../../../../services/admin.service';
-import {Observable} from 'rxjs';
-import {Employee} from '../../../../../employee';
 import {ActivatedRoute, Router} from '@angular/router';
 
 @Component({
-  selector: 'app-doctor-update',
-  templateUrl: './doctor-update.component.html',
-  styleUrls: ['./doctor-update.component.css']
+  selector: 'app-patient-update',
+  templateUrl: './patient-update.component.html',
+  styleUrls: ['./patient-update.component.css']
 })
-export class DoctorUpdateComponent implements OnInit {
+export class PatientUpdateComponent implements OnInit {
   id: number;
-  doctor: Doctor;
+  patient: Patient;
   submitted = false;
 
   constructor(private adminService: AdminService,
@@ -21,20 +19,20 @@ export class DoctorUpdateComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.doctor = new Doctor();
+    this.patient = new Patient();
     this.id = this.route.snapshot.params['id'];
   }
 
-  updateDoctor() {
-    this.adminService.updateDoctor(this.id, this.doctor)
+  updatePatient() {
+    this.adminService.updatePatient(this.id, this.patient)
       .subscribe(data => console.log(data), error => console.log(error));
-    this.doctor = new Doctor();
+    this.patient = new Patient();
     this.getList();
   }
 
   onSubmit(value: any) {
     this.submitted = true;
-    this.updateDoctor();
+    this.updatePatient();
   }
 
   getList() {

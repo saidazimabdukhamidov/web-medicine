@@ -3,7 +3,7 @@ import {AdminService} from '../../../services/admin.service';
 import {SelectionModel} from '@angular/cdk/collections';
 import {Patient} from '../../../models/patient';
 import {MatDialog, MatDialogRef} from '@angular/material/dialog';
-import {Router} from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 import {MatTableDataSource} from '@angular/material/table';
 import {MatSort} from '@angular/material/sort';
 import {MatPaginator} from '@angular/material/paginator';
@@ -25,7 +25,8 @@ export class PatientListComponent implements OnInit, AfterViewInit {
 
   constructor(private adminService: AdminService,
               private modal: MatDialog,
-              private router: Router) {
+              private router: Router,
+              private route: ActivatedRoute) {
   }
 
   ngOnInit() {
@@ -74,6 +75,10 @@ export class PatientListComponent implements OnInit, AfterViewInit {
     this.adminService.getPatientList().subscribe(data => {
       this.dataSource.data = data as Patient[];
     });
+  }
+
+  updatePatient(id: number) {
+    this.router.navigate(['patient-update', id], {relativeTo: this.route});
   }
 
   deletePatient(id: number) {

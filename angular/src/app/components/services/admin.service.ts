@@ -32,6 +32,10 @@ export class AdminService {
     return this.http.put(`${this.docUrl}/${id}`, value);
   }
 
+  updatePatient(id: number, value: any): Observable<Object> {
+    return this.http.put(`${this.patUrl}/${id}`, value);
+  }
+
   getPatientList(): Observable<any> {
     return this.http.get(`${this.patUrl}`);
   }

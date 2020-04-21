@@ -83,7 +83,7 @@
     <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
     <mat-row *matRowDef="let row; columns: displayedColumns;" (click)="selection.toggle(row)"></mat-row>
   </mat-table>
-  <mat-paginator [pageSize]="5" [pageSizeOptions]="[3, 5, 6, 10, 20]">
+  <mat-paginator [pageSize]="3" [pageSizeOptions]="[3, 5, 10, 20]">
   </mat-paginator>
 
 </mat-card>

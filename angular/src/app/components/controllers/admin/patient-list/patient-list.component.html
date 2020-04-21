@@ -71,6 +71,11 @@
     <ng-container matColumnDef="actions">
       <mat-header-cell *matHeaderCellDef mat-sort-header>Actions</mat-header-cell>
       <mat-cell *matCellDef="let patients">
+        <button mat-icon-button color="primary" matTooltip="Update Patient"
+                (click)="updatePatient(patients.patient_id)">
+          <mat-icon>edit</mat-icon>
+        </button>
+
         <button mat-icon-button color="warn" matTooltip="Delete Patient"
                 (click)="deletePatient(patients.patient_id)">
           <mat-icon>delete</mat-icon>
@@ -81,6 +86,6 @@
     <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
     <mat-row *matRowDef="let row; columns: displayedColumns; let i = index"></mat-row>
   </mat-table>
-  <mat-paginator [pageSize]="10" [pageSizeOptions]="[3, 5, 10, 15]">
+  <mat-paginator [pageSize]="3" [pageSizeOptions]="[3, 5, 10, 15]">
   </mat-paginator>
 </div>

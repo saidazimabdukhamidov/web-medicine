@@ -42,6 +42,7 @@ import {MatCheckboxModule} from '@angular/material/checkbox';
 import {MedHistoryListComponent} from './components/controllers/patient/med-history-list/med-history-list.component';
 import {AuthComponent} from './components/controllers/auth/auth.component';
 import {DoctorUpdateComponent} from './components/controllers/admin/doctor-list/doctor-update/doctor-update.component';
+import { PatientUpdateComponent } from './components/controllers/admin/patient-list/patient-update/patient-update.component';
 // import {JwtInterceptor} from './components/guards/jwt.interceptor';
 // import {ErrorInterceptor} from './components/guards/error.interceptor';
 
@@ -65,6 +66,7 @@ import {DoctorUpdateComponent} from './components/controllers/admin/doctor-list/
     MedHistoryListComponent,
     AuthComponent,
     DoctorUpdateComponent,
+    PatientUpdateComponent,
   ],
   imports: [
     MatDialogModule,

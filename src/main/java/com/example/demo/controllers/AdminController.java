@@ -146,37 +146,37 @@ public class AdminController {
     return patients;
   }
 
-  @GetMapping("/doctors/{doctor_id}")
-  public ArrayList<Doctor> readDoctor(@PathVariable int doctor_id) {
-    ArrayList<Doctor> doctors = new ArrayList<>();
-    Connection conn = null;
-    PreparedStatement ps = null;
-    ResultSet rs = null;
-    try {
-      conn = hds.getConnection();
-      ps = conn.prepareStatement("SELECT * FROM SPRING.DOCTOR WHERE DOCTOR_ID = ?");
-      ps.setInt(1, doctor_id);
-      ps.execute();
-      rs = ps.getResultSet();
-      while (rs.next()) {
-        Doctor d = new Doctor();
-        d.setDoctor_id(rs.getInt("doctor_id"));
-        d.setFirst_name(rs.getString("first_name"));
-        d.setLast_name(rs.getString("last_name"));
-        d.setPassport_number(rs.getString("passport_number"));
-        d.setProfession(rs.getString("profession"));
-        d.setAddress(rs.getString("address"));
-        doctors.add(d);
-      }
-    } catch (Exception e) {
-      e.printStackTrace();
-    } finally {
-      DataBase.close(rs);
-      DataBase.close(ps);
-      DataBase.close(conn);
-    }
-    return doctors;
-  }
+//  @GetMapping("/doctors/{doctorId}")
+//  public ArrayList<Doctor> readDoctor(@PathVariable int doctorId) {
+//    ArrayList<Doctor> doctors = new ArrayList<>();
+//    Connection conn = null;
+//    PreparedStatement ps = null;
+//    ResultSet rs = null;
+//    try {
+//      conn = hds.getConnection();
+//      ps = conn.prepareStatement("SELECT * FROM SPRING.DOCTOR WHERE DOCTOR_ID = ?");
+//      ps.setInt(1, doctorId);
+//      ps.execute();
+//      rs = ps.getResultSet();
+//      while (rs.next()) {
+//        Doctor d = new Doctor();
+//        d.setDoctor_id(rs.getInt("doctor_id"));
+//        d.setFirst_name(rs.getString("first_name"));
+//        d.setLast_name(rs.getString("last_name"));
+//        d.setPassport_number(rs.getString("passport_number"));
+//        d.setProfession(rs.getString("profession"));
+//        d.setAddress(rs.getString("address"));
+//        doctors.add(d);
+//      }
+//    } catch (Exception e) {
+//      e.printStackTrace();
+//    } finally {
+//      DataBase.close(rs);
+//      DataBase.close(ps);
+//      DataBase.close(conn);
+//    }
+//    return doctors;
+//  }
 
   @PutMapping("/doctors/{doctor_id}")
   @ResponseBody
@@ -198,6 +198,38 @@ public class AdminController {
       cs.setString(4, passport_number);
       cs.setString(5, profession);
       cs.setString(6, address);
+      cs.executeUpdate();
+    } catch (Exception e) {
+      e.printStackTrace();
+    } finally {
+      DataBase.close(cs);
+      DataBase.close(conn);
+    }
+    return json.toString();
+  }
+
+  @PutMapping("/patients/{patient_id}")
+  @ResponseBody
+  public String updatePatient(@RequestBody Patient patient, @PathVariable int patient_id) {
+    JsonObject json = new JsonObject();
+    Connection conn = null;
+    CallableStatement cs = null;
+    try {
+      String first_name = patient.getFirst_name();
+      String last_name = patient.getLast_name();
+      String father_name = patient.getFather_name();
+      String address = patient.getAddress();
+      String birth_date = patient.getBirth_date();
+      String phone_number = patient.getPhone_number();
+      conn = hds.getConnection();
+      cs = conn.prepareCall("{CALL SPRING.PATIENT_UPDATE_P(?, ?, ?, ?, ?, ?, ?)}");
+      cs.setInt(1, patient_id);
+      cs.setString(2, first_name);
+      cs.setString(3, last_name);
+      cs.setString(4, father_name);
+      cs.setString(5, address);
+      cs.setString(6, birth_date);
+      cs.setString(7, phone_number);
       cs.executeUpdate();
     } catch (Exception e) {
       e.printStackTrace();
