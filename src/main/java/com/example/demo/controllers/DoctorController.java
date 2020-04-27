@@ -13,7 +13,10 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 
-@CrossOrigin(origins = "http://localhost:4200")
+//@CrossOrigin(origins = "http://localhost:4200")
+
+@CrossOrigin(origins = "http://192.168.56.1:8080")
+
 
 @RestController
 @RequestMapping("/api/v1")
@@ -33,7 +36,7 @@ public class DoctorController {
       String createdTime = history.getCreated_time();
       String createdBy = history.getCreated_by();
       conn = hds.getConnection();
-      cs = conn.prepareCall("{CALL SPRING.ADD_MEDICAL_HISTORY_P(?, ?, ?, ?)}");
+      cs = conn.prepareCall("{CALL DOCTOR_PKG.MEDICAL_HISTORY_ADD_P(?, ?, ?, ?)}");
       cs.setInt(1, patientId);
       cs.setString(2, medHistory);
       cs.setString(3, createdBy);

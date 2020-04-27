@@ -1,4 +1,4 @@
-import {AfterViewInit, Component, OnInit, ViewChild} from '@angular/core';
+import {AfterViewInit, Component, Input, OnInit, ViewChild} from '@angular/core';
 import {AdminService} from '../../../services/admin.service';
 import {Doctor} from '../../../models/doctor';
 import {SelectionModel} from '@angular/cdk/collections';

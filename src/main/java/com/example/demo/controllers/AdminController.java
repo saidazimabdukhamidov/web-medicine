@@ -14,7 +14,9 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 
-@CrossOrigin(origins = "http://localhost:4200")
+//@CrossOrigin(origins = "http://localhost:4200")
+
+@CrossOrigin(origins = "http://192.168.56.1:8080")
 
 @RestController
 @RequestMapping("/api/v1")
@@ -22,7 +24,7 @@ public class AdminController {
   @Autowired
   HikariDataSource hds;
 
-  @PostMapping("/doctors")
+  @PostMapping("/doctors")  
   @ResponseBody
   public String addDoctor(@RequestBody Doctor doctor) {
     JsonObject json = new JsonObject();
@@ -35,7 +37,7 @@ public class AdminController {
       String profession = doctor.getProfession();
       String address = doctor.getAddress();
       conn = hds.getConnection();
-      cs = conn.prepareCall("{CALL SPRING.DOCTOR_ADD_P(?, ?, ?, ?, ?)}");
+      cs = conn.prepareCall("{CALL DOCTOR_PKG.DOCTOR_ADD_P(?, ?, ?, ?, ?)}");
       cs.setString(1, firstName);
       cs.setString(2, lastName);
       cs.setString(3, passportNumber);
@@ -190,7 +192,7 @@ public class AdminController {
       String profession = doctor.getProfession();
       String address = doctor.getAddress();
       conn = hds.getConnection();
-      cs = conn.prepareCall("{CALL SPRING.DOCTOR_UPDATE_P(?, ?, ?, ?, ?, ?)}");
+      cs = conn.prepareCall("{CALL DOCTOR_PKG.DOCTOR_UPDATE_P(?, ?, ?, ?, ?, ?)}");
       cs.setInt(1, doctor_id);
       cs.setString(2, first_name);
       cs.setString(3, last_name);
@@ -245,7 +247,7 @@ public class AdminController {
     CallableStatement cs = null;
     try {
       conn = hds.getConnection();
-      cs = conn.prepareCall("{CALL SPRING.DOCTOR_DELETE_P(?)}");
+      cs = conn.prepareCall("{CALL DOCTOR_PKG.DOCTOR_DELETE_P(?)}");
       cs.setInt(1, doctor_id);
       cs.executeUpdate();
     } catch (Exception e) {

@@ -16,6 +16,7 @@ import {MatPaginator} from '@angular/material/paginator';
 })
 export class PatientsComponent implements OnInit, AfterViewInit {
   closeResult = '';
+  patients: Patient;
   displayedColumns = ['select', 'patient_id', 'first_name', 'last_name', 'father_name', 'address', 'birth_date', 'phone_number', 'actions'];
   dataSource = new MatTableDataSource<Patient>();
   selection = new SelectionModel<Patient>(true, []);

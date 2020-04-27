@@ -24,6 +24,10 @@ export class AdminService {
     return this.http.get(`${this.docUrl}`);
   }
 
+  getPatientList(): Observable<any> {
+    return this.http.get(`${this.patUrl}`);
+  }
+
   getDoctor(id: number): Observable<any> {
     return this.http.get(`${this.docUrl}/${id}`);
   }
@@ -34,10 +38,6 @@ export class AdminService {
 
   updatePatient(id: number, value: any): Observable<Object> {
     return this.http.put(`${this.patUrl}/${id}`, value);
-  }
-
-  getPatientList(): Observable<any> {
-    return this.http.get(`${this.patUrl}`);
   }
 
   deleteDoctor(id: number): Observable<any> {

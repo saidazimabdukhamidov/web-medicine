@@ -24,6 +24,7 @@
     "@angular/platform-browser": "~9.1.2",
     "@angular/platform-browser-dynamic": "~9.1.2",
     "@angular/router": "~9.1.2",
+    "@angular/service-worker": "~9.1.2",
     "@ng-bootstrap/ng-bootstrap": "~6.0.3",
     "@ng-bootstrap/schematics": "~2.0.0-alpha.1",
     "bootstrap": "^4.4.1",

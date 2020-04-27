@@ -3,7 +3,6 @@ import {Routes, RouterModule} from '@angular/router';
 import {DashboardComponent} from './components/controllers/admin-dashboard/dashboard.component';
 import {PatientsComponent} from './components/controllers/doctor/patients/patients.component';
 import {HistoryListComponent} from './components/controllers/doctor/history/history-list/history-list.component';
-import {AddHistoryComponent} from './components/controllers/doctor/history/add-history/add-history.component';
 import {MedHistoryListComponent} from './components/controllers/patient/med-history-list/med-history-list.component';
 import {DoctorUpdateComponent} from './components/controllers/admin/doctor-list/doctor-update/doctor-update.component';
 import {PatientUpdateComponent} from './components/controllers/admin/patient-list/patient-update/patient-update.component';
@@ -30,10 +29,6 @@ const routes: Routes = [
   {
     path: 'history/:id',
     component: HistoryListComponent
-  },
-  {
-    path: 'add-history',
-    component: AddHistoryComponent
   },
   {
     path: 'patient',

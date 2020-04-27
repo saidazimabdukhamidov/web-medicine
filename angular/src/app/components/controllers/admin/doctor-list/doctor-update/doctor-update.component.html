@@ -33,6 +33,7 @@
         </button>
         <button
           [disabled]="!postForm.valid"
+          (click)="cancel()"
           class="ml-3"
           type="submit"
           mat-flat-button

@@ -5,6 +5,7 @@ import {ActivatedRoute, Router} from '@angular/router';
 import {MatTableDataSource} from '@angular/material/table';
 import {MatSort} from '@angular/material/sort';
 import {MatPaginator} from '@angular/material/paginator';
+import {Location} from '@angular/common';
 
 @Component({
   selector: 'app-history-list',
@@ -22,14 +23,15 @@ export class HistoryListComponent implements OnInit, AfterViewInit {
 
   constructor(private doctorService: DoctorService,
               private route: ActivatedRoute,
-              private router: Router) {
+              private router: Router,
+              private location: Location) {
   }
 
   ngOnInit() {
     this.getHistory();
   }
 
-  ngAfterViewInit(): void {
+  ngAfterViewInit() {
     this.dataSource.sort = this.sort;
     this.dataSource.paginator = this.paginator;
   }
@@ -48,6 +50,6 @@ export class HistoryListComponent implements OnInit, AfterViewInit {
   }
 
   back() {
-    this.router.navigate(['doctor']);
+    this.location.back();
   }
 }

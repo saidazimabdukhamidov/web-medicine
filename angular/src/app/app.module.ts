@@ -30,7 +30,6 @@ import {DoctorListComponent, ModalDoctor,} from './components/controllers/admin/
 import {PatientListComponent, ModalPatient} from './components/controllers/admin/patient-list/patient-list.component';
 import {ModalHistory, PatientsComponent} from './components/controllers/doctor/patients/patients.component';
 import {HistoryListComponent} from './components/controllers/doctor/history/history-list/history-list.component';
-import {AddHistoryComponent} from './components/controllers/doctor/history/add-history/add-history.component';
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import {MatTabsModule} from '@angular/material/tabs';
 import {MatDialogModule} from '@angular/material/dialog';
@@ -38,6 +37,8 @@ import {MatCheckboxModule} from '@angular/material/checkbox';
 import {MedHistoryListComponent} from './components/controllers/patient/med-history-list/med-history-list.component';
 import {DoctorUpdateComponent} from './components/controllers/admin/doctor-list/doctor-update/doctor-update.component';
 import {PatientUpdateComponent} from './components/controllers/admin/patient-list/patient-update/patient-update.component';
+import {ServiceWorkerModule} from '@angular/service-worker';
+import {environment} from '../environments/environment';
 
 @NgModule({
   declarations: [
@@ -48,7 +49,6 @@ import {PatientUpdateComponent} from './components/controllers/admin/patient-lis
     DoctorListComponent,
     PatientsComponent,
     HistoryListComponent,
-    AddHistoryComponent,
     ModalDoctor,
     ModalPatient,
     ModalHistory,
@@ -85,6 +85,7 @@ import {PatientUpdateComponent} from './components/controllers/admin/patient-lis
     NgbModule,
     MatTabsModule,
     MatCheckboxModule,
+    ServiceWorkerModule.register('ngsw-worker.js', {enabled: environment.production}),
   ],
   exports: [
     MatSortModule,
