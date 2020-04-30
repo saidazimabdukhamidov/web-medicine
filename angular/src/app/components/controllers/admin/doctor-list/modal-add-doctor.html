@@ -1,23 +1,31 @@
 <div [hidden]="submitted">
-  <form #postForm="ngForm" (ngSubmit)="create(postForm.value)">
-    <div class="container row-cols-3">
-      <mat-form-field hidden appearance="outline" class="col-md-6">
+
+  <div class="modal-header">
+    <h2 class="modal-title">Create Doctor</h2>
+    <button type="button" class="close" (click)="close()">
+      <span>&times;</span>
+    </button>
+  </div>
+
+  <div class="modal-body">
+    <form #postForm="ngForm" (ngSubmit)="create(postForm.value)">
+      <mat-form-field hidden appearance="outline" class="col-md-12">
         <mat-label>Doctor ID</mat-label>
         <input matInput type="number" [(ngModel)]="doctors.doctor_id" name="doctorId">
       </mat-form-field>
-      <mat-form-field appearance="outline" class="col-md-6">
+      <mat-form-field appearance="outline" class="col-md-12">
         <mat-label>First Name</mat-label>
         <input matInput type="text" required ngModel [(ngModel)]="doctors.first_name" name="firstName">
       </mat-form-field>
-      <mat-form-field appearance="outline" class="col-md-6">
+      <mat-form-field appearance="outline" class="col-md-12">
         <mat-label>Last Name</mat-label>
         <input matInput type="text" required ngModel [(ngModel)]="doctors.last_name" name="lastName">
       </mat-form-field>
-      <mat-form-field appearance="outline" class="col-md-6">
+      <mat-form-field appearance="outline" class="col-md-12">
         <mat-label>Passport Number</mat-label>
         <input matInput type="text" required ngModel [(ngModel)]="doctors.passport_number" name="passportNumber">
       </mat-form-field>
-      <mat-form-field appearance="outline" class="col-md-6">
+      <mat-form-field appearance="outline" class="col-md-12">
         <mat-label>Profession</mat-label>
         <input matInput type="text" required ngModel [(ngModel)]="doctors.profession" name="profession">
       </mat-form-field>
@@ -26,13 +34,13 @@
         <input matInput type="text" required ngModel [(ngModel)]="doctors.address" name="address">
       </mat-form-field>
       <button
-        (click)="onNoClick()"
+        (click)="close()"
         [disabled]="!postForm.valid"
         mat-raised-button
         color="primary"
         type="submit"
         class="float-right mr-3">Save
       </button>
-    </div>
-  </form>
+    </form>
+  </div>
 </div>

@@ -26,7 +26,10 @@ import {FlexLayoutModule} from '@angular/flex-layout';
 import {MatSidenavModule} from '@angular/material/sidenav';
 import {NavigationComponent} from './components/controllers/navigation/navigation.component';
 import {DashboardComponent} from './components/controllers/admin-dashboard/dashboard.component';
-import {DoctorListComponent, ModalDoctor,} from './components/controllers/admin/doctor-list/doctor-list.component';
+import {
+  DoctorListComponent,
+  ModalDoctor,
+} from './components/controllers/admin/doctor-list/doctor-list.component';
 import {PatientListComponent, ModalPatient} from './components/controllers/admin/patient-list/patient-list.component';
 import {ModalHistory, PatientsComponent} from './components/controllers/doctor/patients/patients.component';
 import {HistoryListComponent} from './components/controllers/doctor/history/history-list/history-list.component';
@@ -35,8 +38,6 @@ import {MatTabsModule} from '@angular/material/tabs';
 import {MatDialogModule} from '@angular/material/dialog';
 import {MatCheckboxModule} from '@angular/material/checkbox';
 import {MedHistoryListComponent} from './components/controllers/patient/med-history-list/med-history-list.component';
-import {DoctorUpdateComponent} from './components/controllers/admin/doctor-list/doctor-update/doctor-update.component';
-import {PatientUpdateComponent} from './components/controllers/admin/patient-list/patient-update/patient-update.component';
 import {ServiceWorkerModule} from '@angular/service-worker';
 import {environment} from '../environments/environment';
 
@@ -53,8 +54,6 @@ import {environment} from '../environments/environment';
     ModalPatient,
     ModalHistory,
     MedHistoryListComponent,
-    DoctorUpdateComponent,
-    PatientUpdateComponent,
   ],
   imports: [
     MatDialogModule,

@@ -73,8 +73,9 @@
     <ng-container matColumnDef="actions">
       <mat-header-cell *matHeaderCellDef mat-sort-header>Actions</mat-header-cell>
       <mat-cell *matCellDef="let patients">
+
         <button mat-icon-button color="primary" matTooltip="Update Patient"
-                (click)="updatePatient(patients.patient_id)">
+                (click)="openModal(editProfileModal, patients)">
           <mat-icon>edit</mat-icon>
         </button>
 
@@ -91,3 +92,59 @@
   <mat-paginator [pageSize]="3" [pageSizeOptions]="[3, 5, 10, 15]">
   </mat-paginator>
 </div>
+
+<ng-template #editProfileModal let-modal>
+  <div class="modal-header">
+    <h2 class="modal-title" id="editProfileLabel">Edit Patient</h2>
+    <button type="button" class="close" (click)="modal.dismiss()">
+      <span>&times;</span>
+    </button>
+  </div>
+
+  <div class="modal-body">
+    <form [formGroup]="editProfileForm" (ngSubmit)="updatePatient()">
+
+      <mat-form-field appearance="outline" class="col-sm-12">
+        <mat-label>First Name</mat-label>
+        <input matInput type="text" required formControlName="first_name" name="first_name">
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" class="col-sm-12">
+        <mat-label>Last Name</mat-label>
+        <input matInput type="text" required formControlName="last_name" name="last_name">
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" class="col-sm-12">
+        <mat-label>Father Name</mat-label>
+        <input matInput type="text" required formControlName="father_name" name="father_name">
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" class="col-sm-12">
+        <mat-label>Address</mat-label>
+        <input matInput type="text" required formControlName="address" name="address">
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" class="col-sm-12">
+        <mat-label>Birth Date</mat-label>
+        <input matInput type="text" required formControlName="birth_date" name="birth_date">
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" class="col-sm-12">
+        <mat-label>Phone Number</mat-label>
+        <input matInput type="text" required formControlName="phone_number" name="phone_number">
+      </mat-form-field>
+
+      <div class="modal-footer">
+        <button mat-raised-button (click)="modal.dismiss()">Cancel</button>
+
+        <button mat-raised-button
+                color="primary"
+                class="ml-3">
+          Save changes
+        </button>
+      </div>
+    </form>
+  </div>
+</ng-template>
+
+

@@ -1,4 +1,4 @@
-import {AfterViewInit, Component, Input, OnInit, ViewChild} from '@angular/core';
+import {AfterViewInit, Component, OnInit, ViewChild} from '@angular/core';
 import {AdminService} from '../../../services/admin.service';
 import {Doctor} from '../../../models/doctor';
 import {SelectionModel} from '@angular/cdk/collections';
@@ -7,6 +7,8 @@ import {MatDialog, MatDialogRef} from '@angular/material/dialog';
 import {ActivatedRoute, Router} from '@angular/router';
 import {MatPaginator} from '@angular/material/paginator';
 import {MatSort} from '@angular/material/sort';
+import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
+import {FormBuilder, FormGroup} from '@angular/forms';
 
 @Component({
   selector: 'app-doctor-list',
@@ -16,8 +18,10 @@ import {MatSort} from '@angular/material/sort';
 export class DoctorListComponent implements OnInit, AfterViewInit {
   displayedColumns = ['select', 'doctor_id', 'first_name', 'last_name', 'passport_number', 'profession', 'address', 'actions'];
   doctors: Doctor[];
+  doctor: Doctor;
   dataSource = new MatTableDataSource<Doctor>();
   selection = new SelectionModel<Doctor>(true, []);
+  editProfileForm: FormGroup;
 
   @ViewChild(MatSort) sort: MatSort;
   @ViewChild(MatPaginator) paginator: MatPaginator;
@@ -25,11 +29,21 @@ export class DoctorListComponent implements OnInit, AfterViewInit {
   constructor(private adminService: AdminService,
               private modal: MatDialog,
               private router: Router,
-              private route: ActivatedRoute) {
+              private route: ActivatedRoute,
+              private modalService: NgbModal,
+              private fb: FormBuilder) {
   }
 
   ngOnInit() {
     this.getDoctors();
+    this.editProfileForm = this.fb.group({
+      doctor_id: [''],
+      first_name: [''],
+      last_name: [''],
+      passport_number: [''],
+      profession: [''],
+      address: ['']
+    });
   }
 
   ngAfterViewInit() {
@@ -70,6 +84,30 @@ export class DoctorListComponent implements OnInit, AfterViewInit {
     });
   }
 
+  openModal(targetModal, doctor) {
+    this.modalService.open(targetModal, {
+      centered: true,
+      backdrop: 'static'
+    });
+
+    this.editProfileForm.patchValue({
+      doctor_id: doctor.doctor_id,
+      first_name: doctor.first_name,
+      last_name: doctor.last_name,
+      passport_number: doctor.passport_number,
+      profession: doctor.profession,
+      address: doctor.address
+    });
+  }
+
+  updateDoctor() {
+    this.adminService.updateDoctor(this.editProfileForm.getRawValue().doctor_id, this.editProfileForm.getRawValue())
+      .subscribe(data => console.log(data), error => console.log(error));
+    this.doctor = new Doctor();
+    this.modalService.dismissAll();
+    this.getDoctors();
+  }
+
   getDoctors() {
     this.adminService.getDoctorList().subscribe(data => {
       this.dataSource.data = data as Doctor[];
@@ -80,10 +118,6 @@ export class DoctorListComponent implements OnInit, AfterViewInit {
     this.adminService.getDoctor(id).subscribe(data => {
       console.log(data)
     })
-  }
-
-  updateDoctor(id: number) {
-    this.router.navigate(['doctor-update', id], {relativeTo: this.route});
   }
 
   deleteDoctor(id: number) {
@@ -114,7 +148,7 @@ export class ModalDoctor {
     this.doctors = new Doctor();
   }
 
-  onNoClick() {
+  close() {
     this.modal.close();
   }
 }

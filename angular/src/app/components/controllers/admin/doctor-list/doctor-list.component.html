@@ -68,8 +68,9 @@
     <ng-container matColumnDef="actions">
       <mat-header-cell *matHeaderCellDef mat-sort-header>Actions</mat-header-cell>
       <mat-cell *matCellDef="let doctors">
+
         <button mat-icon-button color="primary" matTooltip="Update Doctor"
-                (click)="updateDoctor(doctors.doctor_id)">
+                (click)="openModal(editProfileModal, doctors)">
           <mat-icon>edit</mat-icon>
         </button>
 
@@ -86,4 +87,54 @@
   <mat-paginator [pageSize]="3" [pageSizeOptions]="[3, 5, 10, 15]">
   </mat-paginator>
 </div>
+
+<ng-template #editProfileModal let-modal>
+  <div class="modal-header">
+    <h2 class="modal-title" id="editProfileLabel">Edit Doctor</h2>
+    <button type="button" class="close" (click)="modal.dismiss()" aria-label="Close">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+
+  <div class="modal-body">
+    <form [formGroup]="editProfileForm" (ngSubmit)="updateDoctor()">
+
+      <mat-form-field appearance="outline" class="col-sm-12">
+        <mat-label>First Name</mat-label>
+        <input matInput type="text" required formControlName="first_name" name="first_name">
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" class="col-sm-12">
+        <mat-label>Last Name</mat-label>
+        <input matInput type="text" required formControlName="last_name" name="last_name">
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" class="col-sm-12">
+        <mat-label>Passport Number</mat-label>
+        <input matInput type="text" required formControlName="passport_number" name="passport_number">
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" class="col-sm-12">
+        <mat-label>Profession</mat-label>
+        <input matInput type="text" required formControlName="profession" name="profession">
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" class="col-sm-12">
+        <mat-label>Address</mat-label>
+        <input matInput type="text" required formControlName="address" name="address">
+      </mat-form-field>
+
+      <div class="modal-footer">
+        <button mat-raised-button (click)="modal.dismiss()">Cancel</button>
+
+        <button mat-raised-button
+                color="primary"
+                class="ml-3">
+          Save changes
+        </button>
+      </div>
+
+    </form>
+  </div>
+</ng-template>
 

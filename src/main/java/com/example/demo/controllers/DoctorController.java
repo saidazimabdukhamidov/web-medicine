@@ -13,10 +13,9 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 
-//@CrossOrigin(origins = "http://localhost:4200")
+@CrossOrigin(origins = "http://localhost:4200")
 
-@CrossOrigin(origins = "http://192.168.56.1:8080")
-
+//@CrossOrigin(origins = "http://192.168.56.1:8080")
 
 @RestController
 @RequestMapping("/api/v1")

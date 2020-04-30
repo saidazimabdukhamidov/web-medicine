@@ -7,6 +7,8 @@ import {ActivatedRoute, Router} from '@angular/router';
 import {MatTableDataSource} from '@angular/material/table';
 import {MatSort} from '@angular/material/sort';
 import {MatPaginator} from '@angular/material/paginator';
+import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
+import {FormBuilder, FormGroup} from '@angular/forms';
 
 @Component({
   selector: 'app-patient-list',
@@ -17,8 +19,10 @@ export class PatientListComponent implements OnInit, AfterViewInit {
   displayedColumns = ['select', 'patient_id', 'first_name', 'last_name', 'father_name',
     'address', 'birth_date', 'phone_number', 'actions'];
   patients: Patient[];
+  patient: Patient;
   dataSource = new MatTableDataSource<Patient>();
   selection = new SelectionModel<Patient>(true, []);
+  editProfileForm: FormGroup;
 
   @ViewChild(MatSort) sort: MatSort;
   @ViewChild(MatPaginator) paginator: MatPaginator;
@@ -26,11 +30,22 @@ export class PatientListComponent implements OnInit, AfterViewInit {
   constructor(private adminService: AdminService,
               private modal: MatDialog,
               private router: Router,
-              private route: ActivatedRoute) {
+              private route: ActivatedRoute,
+              private modalService: NgbModal,
+              private fb: FormBuilder) {
   }
 
   ngOnInit() {
     this.getPatients();
+    this.editProfileForm = this.fb.group({
+      patient_id: [''],
+      first_name: [''],
+      last_name: [''],
+      father_name: [''],
+      address: [''],
+      birth_date: [''],
+      phone_number: ['']
+    });
   }
 
   ngAfterViewInit() {
@@ -71,14 +86,35 @@ export class PatientListComponent implements OnInit, AfterViewInit {
     });
   }
 
+  openModal(targetModal, patient) {
+    this.modalService.open(targetModal, {
+      centered: true,
+      backdrop: 'static'
+    });
+
+    this.editProfileForm.patchValue({
+      patient_id: patient.patient_id,
+      first_name: patient.first_name,
+      last_name: patient.last_name,
+      father_name: patient.father_name,
+      address: patient.address,
+      birth_date: patient.birth_date,
+      phone_number: patient.phone_number
+    });
+  }
+
   getPatients() {
     this.adminService.getPatientList().subscribe(data => {
       this.dataSource.data = data as Patient[];
     });
   }
 
-  updatePatient(id: number) {
-    this.router.navigate(['patient-update', id], {relativeTo: this.route});
+  updatePatient() {
+    this.adminService.updatePatient(this.editProfileForm.getRawValue().patient_id, this.editProfileForm.getRawValue())
+      .subscribe(data => console.log(data), error => console.log(error));
+    this.patient = new Patient();
+    this.modalService.dismissAll();
+    this.getPatients();
   }
 
   deletePatient(id: number) {
