@@ -10,9 +10,14 @@
 
   <table mat-table [dataSource]="dataSource" matSort matSortStart="asc">
 
-    <ng-container matColumnDef="history">
-      <th mat-header-cell *matHeaderCellDef mat-sort-header>History</th>
-      <td mat-cell *matCellDef="let history"> {{history.history}} </td>
+    <ng-container matColumnDef="first_name">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>First Name</th>
+      <td mat-cell *matCellDef="let history"> {{history.first_name}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="last_name">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Last Name</th>
+      <td mat-cell *matCellDef="let history"> {{history.last_name}} </td>
     </ng-container>
 
     <ng-container matColumnDef="created_time">
@@ -21,8 +26,13 @@
     </ng-container>
 
     <ng-container matColumnDef="created_by">
-      <th mat-header-cell *matHeaderCellDef mat-sort-header>Created By</th>
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Doctor Name</th>
       <td mat-cell *matCellDef="let history"> {{history.created_by}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="history">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>History</th>
+      <td mat-cell *matCellDef="let history"> {{history.history}} </td>
     </ng-container>
 
     <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
@@ -31,48 +41,3 @@
   <mat-paginator [pageSize]="3" [pageSizeOptions]="[3, 5, 10, 15]">
   </mat-paginator>
 </mat-card>
-
-
-<!--  <table class="table">-->
-<!--    <thead>-->
-<!--    <tr>-->
-<!--      <th>History</th>-->
-<!--      <th>Created Time</th>-->
-<!--      <th>Created By</th>-->
-<!--    </tr>-->
-<!--    </thead>-->
-<!--    <tbody>-->
-<!--    <tr *ngFor="let h of history">-->
-<!--      <td>{{h.history}}</td>-->
-<!--      <td>{{h.created_time}}</td>-->
-<!--      <td>{{h.created_by}}</td>-->
-<!--    </tr>-->
-<!--    </tbody>-->
-<!--  </table>-->
-
-
-<!--<div class="container">-->
-<!--  <div class="row">-->
-<!--    <mat-card class="col-2 mr-3 mt-3 shadow-l" *ngFor="let h of history">-->
-<!--      &lt;!&ndash;      <p>&ndash;&gt;-->
-<!--      &lt;!&ndash;        Full Name:&ndash;&gt;-->
-<!--      &lt;!&ndash;        {{h.full_name}}&ndash;&gt;-->
-<!--      &lt;!&ndash;      </p>&ndash;&gt;-->
-<!--      &lt;!&ndash;      <mat-divider></mat-divider>&ndash;&gt;-->
-<!--      <p>-->
-<!--        Doctor Name:-->
-<!--        {{h.created_by}}-->
-<!--      </p>-->
-<!--      <mat-divider></mat-divider>-->
-<!--      <p>-->
-<!--        History:-->
-<!--        {{h.history}}-->
-<!--      </p>-->
-<!--      <mat-divider></mat-divider>-->
-<!--      <p>-->
-<!--        Created Time:-->
-<!--        {{h.created_time}}-->
-<!--      </p>-->
-<!--    </mat-card>-->
-<!--  </div>-->
-<!--</div>-->

@@ -13,7 +13,7 @@ import {Location} from '@angular/common';
   styleUrls: ['./history-list.component.css']
 })
 export class HistoryListComponent implements OnInit, AfterViewInit {
-  displayedColumns = ['history', 'created_time', 'created_by'];
+  displayedColumns = ['first_name', 'last_name', 'created_time', 'created_by', 'history'];
   history: MedHistory;
   dataSource = new MatTableDataSource<MedHistory>();
   id: number;

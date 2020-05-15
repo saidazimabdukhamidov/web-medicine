@@ -150,7 +150,7 @@ export class ModalPatient {
     this.save();
   }
 
-  onNoClick() {
+  close() {
     this.modal.close();
   }
 }

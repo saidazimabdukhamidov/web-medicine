@@ -8,10 +8,10 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class Doctor {
-  Integer doctor_id;
-  String first_name;
-  String last_name;
-  String passport_number;
-  String profession;
-  String address;
+  public int doctor_id;
+  public String first_name;
+  public String last_name;
+  public String passport_number;
+  public String profession;
+  public String address;
 }

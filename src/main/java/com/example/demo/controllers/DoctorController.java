@@ -7,10 +7,7 @@ import com.zaxxer.hikari.HikariDataSource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import java.sql.CallableStatement;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
+import java.sql.*;
 import java.util.ArrayList;
 
 @CrossOrigin(origins = "http://localhost:4200")
@@ -20,6 +17,7 @@ import java.util.ArrayList;
 @RestController
 @RequestMapping("/api/v1")
 public class DoctorController {
+
   @Autowired
   HikariDataSource hds;
 
@@ -58,14 +56,15 @@ public class DoctorController {
     ResultSet rs = null;
     try {
       conn = hds.getConnection();
-      ps = conn.prepareStatement("SELECT * FROM SPRING.MEDICAL_HISTORY WHERE PATIENT_ID = ?");
+      ps = conn.prepareStatement("SELECT * FROM MEDICAL_HISTORY WHERE PATIENT_ID = ?");
       ps.setInt(1, patient_id);
       ps.execute();
       rs = ps.getResultSet();
       while (rs.next()) {
         MedicalHistory h = new MedicalHistory();
         h.setPatient_id(rs.getInt("patient_id"));
-        h.setFull_name(rs.getString("full_name"));
+        h.setFirst_name(rs.getString("first_name"));
+        h.setLast_name(rs.getString("last_name"));
         h.setHistory(rs.getString("history"));
         h.setCreated_time(rs.getString("created_time"));
         h.setCreated_by(rs.getString("created_by"));
@@ -95,7 +94,8 @@ public class DoctorController {
       while (rs.next()) {
         MedicalHistory h = new MedicalHistory();
         h.setPatient_id(rs.getInt("patient_id"));
-        h.setFull_name(rs.getString("full_name"));
+        h.setFirst_name(rs.getString("first_name"));
+        h.setLast_name(rs.getString("last_name"));
         h.setHistory(rs.getString("history"));
         h.setCreated_time(rs.getString("created_time"));
         h.setCreated_by(rs.getString("created_by"));
