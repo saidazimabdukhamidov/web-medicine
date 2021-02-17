@@ -33,7 +33,7 @@ public class DoctorController {
       String createdTime = history.getCreated_time();
       String createdBy = history.getCreated_by();
       conn = hds.getConnection();
-      cs = conn.prepareCall("{CALL DOCTOR_PKG.MEDICAL_HISTORY_ADD_P(?, ?, ?, ?)}");
+      cs = conn.prepareCall("{CALL Doctor_Pkg.Add_medical_history_p(?, ?, ?, ?)}");
       cs.setInt(1, patientId);
       cs.setString(2, medHistory);
       cs.setString(3, createdBy);

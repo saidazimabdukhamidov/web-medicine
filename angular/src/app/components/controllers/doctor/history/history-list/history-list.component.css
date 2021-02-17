@@ -6,6 +6,15 @@ button {
   outline: none;
 }
 
+mat-header-cell{
+  font-size: smaller;
+}
+
+mat-cell {
+  font-size: smaller;
+}
+
+
 table {
   width: 100%;
   overflow-x: auto;

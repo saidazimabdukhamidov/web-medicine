@@ -16,6 +16,14 @@
   right: 10px;
 }
 
+mat-tab {
+  font-size: smaller;
+}
+
+.mat-tab-label-content{
+  font-size: xx-small;
+}
+
 .dashboard-card-content {
   text-align: center;
 }

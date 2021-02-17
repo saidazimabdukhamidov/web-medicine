@@ -1,14 +1,14 @@
-import {AfterViewInit, Component, OnInit, ViewChild} from '@angular/core';
-import {AdminService} from '../../../services/admin.service';
-import {Doctor} from '../../../models/doctor';
-import {SelectionModel} from '@angular/cdk/collections';
-import {MatTableDataSource} from '@angular/material/table';
-import {MatDialog, MatDialogRef} from '@angular/material/dialog';
-import {ActivatedRoute, Router} from '@angular/router';
-import {MatPaginator} from '@angular/material/paginator';
-import {MatSort} from '@angular/material/sort';
-import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
-import {FormBuilder, FormGroup} from '@angular/forms';
+import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
+import { AdminService } from '../../../services/admin.service';
+import { Doctor } from '../../../models/doctor';
+import { SelectionModel } from '@angular/cdk/collections';
+import { MatTableDataSource } from '@angular/material/table';
+import { MatDialog, MatDialogRef } from '@angular/material/dialog';
+import { ActivatedRoute, Router } from '@angular/router';
+import { MatPaginator } from '@angular/material/paginator';
+import { MatSort } from '@angular/material/sort';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { FormBuilder, FormGroup } from '@angular/forms';
 
 @Component({
   selector: 'app-doctor-list',
@@ -27,11 +27,11 @@ export class DoctorListComponent implements OnInit, AfterViewInit {
   @ViewChild(MatPaginator) paginator: MatPaginator;
 
   constructor(private adminService: AdminService,
-              private modal: MatDialog,
-              private router: Router,
-              private route: ActivatedRoute,
-              private modalService: NgbModal,
-              private fb: FormBuilder) {
+    private modal: MatDialog,
+    private router: Router,
+    private route: ActivatedRoute,
+    private modalService: NgbModal,
+    private fb: FormBuilder) {
   }
 
   ngOnInit() {
@@ -101,8 +101,9 @@ export class DoctorListComponent implements OnInit, AfterViewInit {
   }
 
   updateDoctor() {
-    this.adminService.updateDoctor(this.editProfileForm.getRawValue().doctor_id, this.editProfileForm.getRawValue())
-      .subscribe(data => console.log(data), error => console.log(error));
+    this.adminService.updateDoctor(this.editProfileForm.getRawValue().doctor_id,
+      this.editProfileForm.getRawValue()).subscribe(data => console.log(data),
+        error => console.log(error));
     this.doctor = new Doctor();
     this.modalService.dismissAll();
     this.getDoctors();
@@ -121,9 +122,11 @@ export class DoctorListComponent implements OnInit, AfterViewInit {
   }
 
   deleteDoctor(id: number) {
-    this.adminService.deleteDoctor(id).subscribe(data => {
-      this.getDoctors();
-    })
+    if (confirm('Are you sure to delete?')) {
+      this.adminService.deleteDoctor(id).subscribe(data => {
+        this.getDoctors();
+      })
+    }
   }
 }
 
@@ -137,7 +140,7 @@ export class ModalDoctor {
   submitted = false;
 
   constructor(private adminService: AdminService,
-              private modal: MatDialogRef<ModalDoctor>) {
+    private modal: MatDialogRef<ModalDoctor>) {
   }
 
   create(value: any) {

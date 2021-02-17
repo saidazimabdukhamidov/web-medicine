@@ -10,6 +10,14 @@ table {
   outline: none;
 }
 
+mat-header-cell{
+  font-size: smaller;
+}
+
+mat-cell {
+  font-size: smaller;
+}
+
 /*.div-card-header {*/
 /*  display: flex;*/
 /*  align-items: center;*/

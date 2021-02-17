@@ -34,6 +34,7 @@
         <mat-label>Profession</mat-label>
         <input matInput type="text" required ngModel [(ngModel)]="doctors.profession" name="profession">
       </mat-form-field>
+      
       <mat-form-field appearance="outline" class="col-md-12">
         <mat-label>Address</mat-label>
         <input matInput type="text" required ngModel [(ngModel)]="doctors.address" name="address">
@@ -44,10 +45,10 @@
         <button mat-raised-button (click)="close()">Cancel</button>
 
         <button
-          (click)="close()"
-          [disabled]="!postForm.valid"
           mat-raised-button
           color="primary"
+          (click)="close()"
+          [disabled]="!postForm.valid"
           type="submit"
           class="float-right ml-3">Save Doctor
         </button>

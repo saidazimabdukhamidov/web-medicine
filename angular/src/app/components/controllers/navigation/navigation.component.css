@@ -1,9 +1,10 @@
 button {
   outline: none;
+  font-size: large;
 }
 
-.m-b {
-  font-size: large;
+span {
+  font-size: smaller;
 }
 
 .sidenav-container {

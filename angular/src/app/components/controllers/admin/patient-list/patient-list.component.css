@@ -1,3 +1,11 @@
 button {
   outline: none;
 }
+
+mat-header-cell{
+  font-size: smaller;
+}
+
+mat-cell {
+  font-size: smaller;
+}
