@@ -22,9 +22,8 @@ import java.util.ArrayList;
 @RequestMapping("/api/v1")
 public class AdminController {
 
-  @Autowired
-  HikariDataSource hds;
-
+  @Autowired HikariDataSource hds;
+  
   @PostMapping("/doctors")  
   @ResponseBody
   public String addDoctor(@RequestBody Doctor doctor) {
@@ -93,7 +92,7 @@ public class AdminController {
     ResultSet rs = null;
     try {
       conn = hds.getConnection();
-      ps = conn.prepareStatement("SELECT * FROM SPRING.DOCTOR");
+      ps = conn.prepareStatement("SELECT * FROM SPRING.DOCTOR order by doctor_id");
       ps.execute();
       rs = ps.getResultSet();
       while (rs.next()) {
