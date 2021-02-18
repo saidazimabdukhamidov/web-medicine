@@ -12,11 +12,11 @@ export class AdminService {
   constructor(private http: HttpClient) {
   }
 
-  addDoctor(doctor: Object): Observable<Object> {
+  addDoctor(doctor: object): Observable<object> {
     return this.http.post(`${this.docUrl}`, doctor);
   }
 
-  addPatient(patient: Object): Observable<Object> {
+  addPatient(patient: object): Observable<object> {
     return this.http.post(`${this.patUrl}`, patient);
   }
 
@@ -32,11 +32,11 @@ export class AdminService {
     return this.http.get(`${this.docUrl}/${id}`);
   }
 
-  updateDoctor(id: number, value: any): Observable<Object> {
+  updateDoctor(id: number, value: any): Observable<object> {
     return this.http.put(`${this.docUrl}/${id}`, value);
   }
 
-  updatePatient(id: number, value: any): Observable<Object> {
+  updatePatient(id: number, value: any): Observable<object> {
     return this.http.put(`${this.patUrl}/${id}`, value);
   }
 
