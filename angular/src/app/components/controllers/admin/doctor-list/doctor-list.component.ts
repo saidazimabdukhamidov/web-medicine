@@ -9,6 +9,7 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { FormBuilder, FormGroup } from '@angular/forms';
+import { map } from 'rxjs/operators';
 
 @Component({
   selector: 'app-doctor-list',
