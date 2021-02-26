@@ -36,7 +36,6 @@ public class Requests {
         String paramValue = paramValues[i];
         str += paramName + ":" + "\"" + paramValue + "\"" + ",";
       }
-
     }
     str = str.substring(0, str.length() - 1);
     str += "}";
