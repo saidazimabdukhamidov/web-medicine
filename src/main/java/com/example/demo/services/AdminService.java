@@ -20,7 +20,7 @@ public class AdminService {
 
   public String readDoctors() {
     Connection conn = null;
-    JSONArray array = new JSONArray();
+    JSONArray response = new JSONArray();
     PreparedStatement ps = null;
     ResultSet rs = null;
     try {
@@ -36,7 +36,7 @@ public class AdminService {
         obj.put("passport_number", rs.getString("passport_number"));
         obj.put("profession", rs.getString("profession"));
         obj.put("address", rs.getString("address"));
-        array.put(obj);
+        response.put(obj);
       }
     } catch (Exception e) {
       e.printStackTrace();
@@ -45,7 +45,7 @@ public class AdminService {
       DataBase.close(ps);
       DataBase.close(conn);
     }
-    return array.toString();
+    return response.toString();
   }
 
   public String addDoctor(JSONObject params) throws JSONException {

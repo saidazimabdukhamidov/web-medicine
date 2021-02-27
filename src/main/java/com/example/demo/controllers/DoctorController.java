@@ -1,9 +1,11 @@
 package com.example.demo.controllers;
 
 import com.example.demo.models.MedicalHistory;
+import com.example.demo.services.DoctorService;
 import com.example.demo.utils.DataBase;
 import com.google.gson.JsonObject;
 import com.zaxxer.hikari.HikariDataSource;
+import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -18,96 +20,22 @@ import java.util.ArrayList;
 @RequestMapping("/api/v1")
 public class DoctorController {
 
-  @Autowired
-  HikariDataSource hds;
+  @Autowired HikariDataSource hds;
+  @Autowired DoctorService sDoctor;
 
   @PostMapping("/histories")
-  @ResponseBody
-  public String addMedHistory(@RequestBody MedicalHistory history) {
-    JsonObject json = new JsonObject();
-    Connection conn = null;
-    CallableStatement cs = null;
-    try {
-      int patientId = history.getPatient_id();
-      String medHistory = history.getHistory();
-      String createdTime = history.getCreated_time();
-      String createdBy = history.getCreated_by();
-      conn = hds.getConnection();
-      cs = conn.prepareCall("{CALL Doctor_Pkg.Add_medical_history_p(?, ?, ?, ?)}");
-      cs.setInt(1, patientId);
-      cs.setString(2, medHistory);
-      cs.setString(3, createdBy);
-      cs.setString(4, createdTime);
-      cs.executeUpdate();
-    } catch (Exception e) {
-      e.printStackTrace();
-    } finally {
-      DataBase.close(cs);
-      DataBase.close(conn);
-    }
-    return json.toString();
+  public String addMedHistory(@RequestBody String parameters) {
+    JSONObject data = new JSONObject(parameters);
+    return sDoctor.addMedHistory(data);
   }
 
   @GetMapping("/patients/{patient_id}")
-  public ArrayList readPatient(@PathVariable int patient_id) {
-    ArrayList<MedicalHistory> history = new ArrayList<>();
-    Connection conn = null;
-    PreparedStatement ps = null;
-    ResultSet rs = null;
-    try {
-      conn = hds.getConnection();
-      ps = conn.prepareStatement("SELECT * FROM MEDICAL_HISTORY WHERE PATIENT_ID = ?");
-      ps.setInt(1, patient_id);
-      ps.execute();
-      rs = ps.getResultSet();
-      while (rs.next()) {
-        MedicalHistory h = new MedicalHistory();
-        h.setPatient_id(rs.getInt("patient_id"));
-        h.setFirst_name(rs.getString("first_name"));
-        h.setLast_name(rs.getString("last_name"));
-        h.setHistory(rs.getString("history"));
-        h.setCreated_time(rs.getString("created_time"));
-        h.setCreated_by(rs.getString("created_by"));
-        history.add(h);
-      }
-    } catch (Exception e) {
-      e.printStackTrace();
-    } finally {
-      DataBase.close(rs);
-      DataBase.close(ps);
-      DataBase.close(conn);
-    }
-    return history;
+  public String readPatient(@PathVariable int patient_id) {
+    return sDoctor.readPatient(patient_id);
   }
 
   @GetMapping("/histories")
-  public ArrayList readMedHistory() {
-    ArrayList<MedicalHistory> history = new ArrayList<>();
-    Connection conn = null;
-    PreparedStatement ps = null;
-    ResultSet rs = null;
-    try {
-      conn = hds.getConnection();
-      ps = conn.prepareStatement("SELECT * FROM SPRING.MEDICAL_HISTORY");
-      ps.execute();
-      rs = ps.getResultSet();
-      while (rs.next()) {
-        MedicalHistory h = new MedicalHistory();
-        h.setPatient_id(rs.getInt("patient_id"));
-        h.setFirst_name(rs.getString("first_name"));
-        h.setLast_name(rs.getString("last_name"));
-        h.setHistory(rs.getString("history"));
-        h.setCreated_time(rs.getString("created_time"));
-        h.setCreated_by(rs.getString("created_by"));
-        history.add(h);
-      }
-    } catch (Exception e) {
-      e.printStackTrace();
-    } finally {
-      DataBase.close(rs);
-      DataBase.close(ps);
-      DataBase.close(conn);
-    }
-    return history;
+  public String readMedHistory() {
+    return sDoctor.readHistories();
   }
 }

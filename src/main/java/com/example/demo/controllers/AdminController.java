@@ -23,14 +23,12 @@ public class AdminController {
   }
 
   @PostMapping("/doctors")
-  @ResponseBody
   public String addDoctor(@RequestBody String parameters) {
     JSONObject data = new JSONObject(parameters);
     return sAdmin.addDoctor(data);
   }
 
   @PostMapping("/patients")
-  @ResponseBody
   public String addPatient(@RequestBody String parameters) {
     JSONObject data = new JSONObject(parameters);
     return sAdmin.addPatient(data);
@@ -42,14 +40,12 @@ public class AdminController {
   }
 
   @PutMapping("/doctors/{doctor_id}")
-  @ResponseBody
   public String updateDoctor(@RequestBody String parameters, @PathVariable int doctor_id) {
     JSONObject data = new JSONObject(parameters);
     return sAdmin.updateDoctor(data, doctor_id);
   }
 
   @PutMapping("/patients/{patient_id}")
-  @ResponseBody
   public String updatePatient(@RequestBody String parameters, @PathVariable int patient_id) {
     JSONObject data = new JSONObject(parameters);
     return sAdmin.updatePatient(data, patient_id);
