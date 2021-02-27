@@ -1,16 +1,10 @@
 package com.example.demo.controllers;
 
-import com.example.demo.models.MedicalHistory;
 import com.example.demo.services.DoctorService;
-import com.example.demo.utils.DataBase;
-import com.google.gson.JsonObject;
 import com.zaxxer.hikari.HikariDataSource;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-
-import java.sql.*;
-import java.util.ArrayList;
 
 @CrossOrigin(origins = "http://localhost:4200")
 
