@@ -75,6 +75,10 @@ export class DoctorListComponent implements OnInit, AfterViewInit {
     this.dataSource.filter = value.trim().toLocaleLowerCase();
   }
 
+  doFiltration(value: string) {
+    this.dataSource.filter = value.trim().toLocaleLowerCase();
+  }
+
   openDialog() {
     const modal = this.modal.open(ModalDoctor, {
       width: '640px',
