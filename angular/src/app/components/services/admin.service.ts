@@ -1,9 +1,7 @@
-import {Injectable} from '@angular/core';
-import {HttpClient} from '@angular/common/http';
-import {Observable} from 'rxjs';
+import { Injectable } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
 
 const url = 'http://localhost:8084/api/v1/';
-
 
 @Injectable({
   providedIn: 'root'
@@ -13,39 +11,39 @@ export class AdminService {
   constructor(private http: HttpClient) {
   }
 
-  addDoctor(doctor: object): Observable<object> {
-    return this.http.post(url + 'doctors', doctor);
+  addDoctor(data: object): any {
+    return this.http.post(url + 'doctors', data);
   }
 
-  addPatient(patient: object): Observable<object> {
-    return this.http.post(url + 'patients', patient);
+  addPatient(data: object): any {
+    return this.http.post(url + 'patients', data);
   }
 
-  getDoctorList(): Observable<any> {
+  getDoctorList(): any {
     return this.http.get(url + 'doctors');
   }
 
-  getPatientList(): Observable<any> {
+  getPatientList(): any {
     return this.http.get(url + 'patients');
   }
 
-  getDoctor(id: number): Observable<any> {
+  getDoctor(id: number): any {
     return this.http.get(url + 'doctors/' + `${id}`);
   }
 
-  updateDoctor(id: number, value: any): Observable<object> {
-    return this.http.put(url + 'doctors/' + `${id}`, value);
+  updateDoctor(id: number, data: any): any {
+    return this.http.put(url + 'doctors/' + `${id}`, data);
   }
 
-  updatePatient(id: number, value: any): Observable<object> {
-    return this.http.put(url + 'patients/' + `${id}`, value);
+  updatePatient(id: number, data: any): any {
+    return this.http.put(url + 'patients/' + `${id}`, data);
   }
 
-  deleteDoctor(id: number): Observable<any> {
+  deleteDoctor(id: number): any {
     return this.http.delete(url + 'doctors/' + `${id}`);
   }
 
-  deletePatient(id: number): Observable<any> {
+  deletePatient(id: number): any {
     return this.http.delete(url + 'patients/' + `${id}`);
   }
 }

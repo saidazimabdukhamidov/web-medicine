@@ -27,11 +27,11 @@ export class DoctorListComponent implements OnInit, AfterViewInit {
   @ViewChild(MatPaginator) paginator: MatPaginator;
 
   constructor(private adminService: AdminService,
-    private modal: MatDialog,
-    private router: Router,
-    private route: ActivatedRoute,
-    private modalService: NgbModal,
-    private fb: FormBuilder) {
+              private modal: MatDialog,
+              private router: Router,
+              private route: ActivatedRoute,
+              private modalService: NgbModal,
+              private fb: FormBuilder) {
   }
 
   ngOnInit() {
@@ -103,7 +103,7 @@ export class DoctorListComponent implements OnInit, AfterViewInit {
   updateDoctor() {
     this.adminService.updateDoctor(this.editProfileForm.getRawValue().doctor_id,
       this.editProfileForm.getRawValue()).subscribe(data => console.log(data),
-        error => console.log(error));
+      error => console.log(error));
     this.doctor = new Doctor();
     this.modalService.dismissAll();
     this.getDoctors();
@@ -140,7 +140,7 @@ export class ModalDoctor {
   submitted = false;
 
   constructor(private adminService: AdminService,
-    private modal: MatDialogRef<ModalDoctor>) {
+              private modal: MatDialogRef<ModalDoctor>) {
   }
 
   create(value: any) {
